@@ -10,7 +10,6 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            /* Background gradasi halus */
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             min-height: 100vh;
             display: flex;
@@ -28,7 +27,6 @@
             background: #ffffff;
             padding: 40px 35px;
             border-radius: 16px;
-            /* Shadow yang lebih modern dan lembut */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
@@ -55,15 +53,13 @@
             letter-spacing: 0.3px;
         }
 
-        /* Menambahkan tanda bintang merah untuk field wajib */
         label.required::after {
             content: " *";
             color: #e53e3e;
             font-size: 14px;
         }
 
-        input,
-        select {
+        input, select {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #e2e8f0;
@@ -76,9 +72,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Efek menyala saat form diklik */
-        input:focus,
-        select:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #3182ce;
             background-color: #ffffff;
@@ -103,7 +97,6 @@
         button {
             width: 100%;
             padding: 15px;
-            /* Warna tombol gradient hijau profesional */
             background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             color: white;
             border: none;
@@ -117,14 +110,9 @@
             box-shadow: 0 4px 15px rgba(56, 161, 105, 0.3);
         }
 
-        /* Efek terangkat saat disentuh kursor */
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(56, 161, 105, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
         }
 
         button:disabled {
@@ -133,83 +121,149 @@
             cursor: not-allowed;
             transform: none;
         }
+
+        /* Styling Khusus untuk Box QRIS */
+        #qrisContainer {
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        #qrisContainer h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+
+        #qrisContainer img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e0;
+            padding: 10px;
+            margin: 15px 0;
+        }
+
+        .btn-wa {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-wa:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <h2>Booking Estepict.grad</h2>
-        <form id="bookingForm" name="booking-form">
-            <div class="form-group">
-                <label class="required">Nama Lengkap</label>
-                <input type="text" name="Nama" required placeholder="Contoh: Melsa">
-            </div>
-            <div class="form-group">
-                <label class="required">Domisili</label>
-                <input type="text" name="Domisili" required placeholder="Contoh: Semarang">
-            </div>
-            <div class="form-group">
-                <label class="required">Kampus - Fakultas</label>
-                <input type="text" name="Univ" required placeholder="UNDIP - FMIPA">
-            </div>
-            <div class="form-group">
-                <label class="required">Username Instagram</label>
-                <input type="text" name="IG" required placeholder="@estepict.grad">
-            </div>
-            <div class="form-group">
-                <label class="required">Paket Yang Diambil</label>
-                <select name="Paket" required>
-                    <option value="" disabled selected>-- Pilih Paket --</option>
-                    <option value="TOGA 1">TOGA 1</option>
-                    <option value="TOGA 2">TOGA 2</option>
-                    <option value="BESTIE 1">BESTIE 1</option>
-                    <option value="BESTIE 2">BESTIE 2</option>
-                    <option value="GROUP 1">GROUP 1</option>
-                    <option value="GROUP 2">GROUP 2</option>
-                    <option value="GROUP 3">GROUP 3</option>
-                    <option value="VIDEO ONLY 1">VIDEO ONLY 1</option>
-                    <option value="VIDEO ONLY 2">VIDEO ONLY 2</option>
-                    <option value="PHOTO & VIDEO 1">PHOTO & VIDEO 1</option>
-                    <option value="PHOTO & VIDEO 2">PHOTO & VIDEO 2</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="required">Tanggal Foto</label>
-                <input type="date" name="Tanggal" required>
-            </div>
-            <div class="form-group">
-                <label class="required">Waktu (Jam Mulai - Selesai)</label>
-                <div class="waktu-container">
-                    <input type="time" id="jamMulai" required>
-                    <span>-</span>
-                    <input type="time" id="jamSelesai" required>
+        
+        <div id="formSection">
+            <h2>Booking Estepict.grad</h2>
+            <form id="bookingForm" name="booking-form">
+                <div class="form-group">
+                    <label class="required">Nama Lengkap</label>
+                    <input type="text" name="Nama" required placeholder="Contoh: Melsa">
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">No WhatsApp Aktif</label>
-                <input type="number" name="Telp" required placeholder="085866571393">
-            </div>
-            <div class="form-group">
-                <label class="required">Lokasi Foto</label>
-                <input type="text" name="Lokasi" required placeholder="Contoh: Widya Puraya">
-            </div>
+                <div class="form-group">
+                    <label class="required">Domisili</label>
+                    <input type="text" name="Domisili" required placeholder="Contoh: Semarang">
+                </div>
+                <div class="form-group">
+                    <label class="required">Kampus - Fakultas</label>
+                    <input type="text" name="Univ" required placeholder="UNDIP - FMIPA">
+                </div>
+                <div class="form-group">
+                    <label class="required">Username Instagram</label>
+                    <input type="text" name="IG" required placeholder="@estepict.grad">
+                </div>
+                <div class="form-group">
+                    <label class="required">Paket Yang Diambil</label>
+                    <select name="Paket" required>
+                        <option value="" disabled selected>-- Pilih Paket --</option>
+                        <option value="TOGA 1">TOGA 1</option>
+                        <option value="TOGA 2">TOGA 2</option>
+                        <option value="BESTIE 1">BESTIE 1</option>
+                        <option value="BESTIE 2">BESTIE 2</option>
+                        <option value="GROUP 1">GROUP 1</option>
+                        <option value="GROUP 2">GROUP 2</option>
+                        <option value="GROUP 3">GROUP 3</option>
+                        <option value="VIDEO ONLY 1">VIDEO ONLY 1</option>
+                        <option value="VIDEO ONLY 2">VIDEO ONLY 2</option>
+                        <option value="PHOTO & VIDEO 1">PHOTO & VIDEO 1</option>
+                        <option value="PHOTO & VIDEO 2">PHOTO & VIDEO 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="required">Tanggal Foto</label>
+                    <input type="date" name="Tanggal" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Waktu (Jam Mulai - Selesai)</label>
+                    <div class="waktu-container">
+                        <input type="time" id="jamMulai" required>
+                        <span>-</span>
+                        <input type="time" id="jamSelesai" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="required">No WhatsApp Aktif</label>
+                    <input type="number" name="Telp" required placeholder="085866571393">
+                </div>
+                <div class="form-group">
+                    <label class="required">Lokasi Foto</label>
+                    <input type="text" name="Lokasi" required placeholder="Contoh: Widya Puraya">
+                </div>
 
-            <button type="submit" id="btnSubmit">Booking Sekarang</button>
-        </form>
+                <button type="submit" id="btnSubmit">Booking Sekarang</button>
+            </form>
+        </div>
+
+        <div id="qrisContainer" style="display: none;">
+            <h3>Booking Terjadwal! 🎉</h3>
+            <p style="font-size: 14px; color: #4a5568;">Langkah terakhir, silakan scan QRIS di bawah ini untuk pembayaran DP.</p>
+            
+            <img src="https://raw.githubusercontent.com/binasafa/booking-estepictgrad/refs/heads/main/qris.jpeg" alt="QRIS Estepict">
+            
+            <p style="font-size: 13px; color: #e53e3e; font-weight: bold; margin-bottom: 5px;">⚠️ PENTING: Screenshot bukti transfer!</p>
+            <p style="font-size: 12px; color: #718096; margin-top: 0;">Jika sudah transfer, klik tombol di bawah untuk mengirim bukti ke Admin.</p>
+            
+            <a id="btnLanjutWA" href="#" class="btn-wa">Lanjut Konfirmasi ke WA</a>
+        </div>
+
     </div>
 
     <script>
+        // PASTIKAN URL SCRIPT DAN NOMOR WA SESUAI
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyCLWmXCuYlwpP2WQscCgZToiMtCYQzxgVT097_eCcwELUHTjhPcJRlBf-n6RnKQq8p/exec';
         const nomorWA = '6289684400600';
 
         const form = document.forms['booking-form'];
         const btnSubmit = document.getElementById('btnSubmit');
+        const formSection = document.getElementById('formSection');
+        const qrisContainer = document.getElementById('qrisContainer');
+        const btnLanjutWA = document.getElementById('btnLanjutWA');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
 
-            btnSubmit.innerHTML = 'Meneruskan ke WhatsApp...';
+            btnSubmit.innerHTML = 'Merekap Data...';
             btnSubmit.disabled = true;
 
             const formData = new FormData(form);
@@ -240,7 +294,7 @@
                     const telp = formData.get('Telp');
                     const lokasi = formData.get('Lokasi');
 
-                    const pesanTemplate = `Halo Admin, saya sudah mengisi form booking via Website!
+                    const pesanTemplate = `Halo Admin, saya sudah mengisi form booking via Website dan sudah transfer DP via QRIS!
 
 NAMA : ${nama}
 DOMISILI : ${domisili}
@@ -255,7 +309,15 @@ LOK FOTO : ${lokasi}
 Berikut saya lampirkan bukti transfer DP-nya...`;
 
                     const textWA = encodeURIComponent(pesanTemplate);
-                    window.location.href = `https://wa.me/${nomorWA}?text=${textWA}`;
+                    const linkWA = `https://wa.me/${nomorWA}?text=${textWA}`;
+                    
+                    // --- INOVASI: TAMPILKAN QRIS, BUKAN LANGSUNG REDIRECT ---
+                    // Sembunyikan form
+                    formSection.style.display = 'none';
+                    // Tampilkan kotak QRIS
+                    qrisContainer.style.display = 'block';
+                    // Pasang link WA ke tombol hijau yang baru
+                    btnLanjutWA.href = linkWA;
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
