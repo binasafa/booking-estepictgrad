@@ -122,24 +122,49 @@
             transform: none;
         }
 
-        /* Styling Khusus untuk Box QRIS */
-        #qrisContainer {
+        /* Styling Khusus untuk Box Transfer Rekening */
+        #paymentContainer {
             text-align: center;
             animation: fadeIn 0.5s;
         }
 
-        #qrisContainer h3 {
+        #paymentContainer h3 {
             color: #28a745;
             margin-top: 0;
         }
 
-        #qrisContainer img {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 12px;
+        .bank-card {
+            background: #f8fafc;
             border: 2px dashed #cbd5e0;
-            padding: 10px;
-            margin: 15px 0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .bank-name {
+            display: block;
+            font-weight: 700;
+            color: #00a5cf; /* Warna khas blu */
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .account-number {
+            display: block;
+            font-weight: 700;
+            font-size: 24px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .account-name {
+            display: block;
+            font-size: 14px;
+            color: #4a5568;
+            font-weight: 500;
         }
 
         .btn-wa {
@@ -236,11 +261,16 @@
             </form>
         </div>
 
-        <div id="qrisContainer" style="display: none;">
+        <!-- Box Transfer Pembayaran (Pengganti QRIS) -->
+        <div id="paymentContainer" style="display: none;">
             <h3>Booking Terjadwal! 🎉</h3>
-            <p style="font-size: 14px; color: #4a5568;">Langkah terakhir, silakan scan QRIS di bawah ini untuk pembayaran DP.</p>
+            <p style="font-size: 14px; color: #4a5568;">Langkah terakhir, silakan transfer DP ke rekening di bawah ini:</p>
             
-            <img src="https://i.postimg.cc/L661R054/qris.jpg" alt="QRIS Estepict">
+            <div class="bank-card">
+                <span class="bank-name">blu by BCA Digital</span>
+                <span class="account-number">003174689178</span>
+                <span class="account-name">A.N BINA SATRIA FAUZI</span>
+            </div>
             
             <p style="font-size: 13px; color: #e53e3e; font-weight: bold; margin-bottom: 5px;">⚠️ PENTING: Screenshot bukti transfer!</p>
             <p style="font-size: 12px; color: #718096; margin-top: 0;">Jika sudah transfer, klik tombol di bawah untuk mengirim bukti ke Admin.</p>
@@ -258,7 +288,7 @@
         const form = document.forms['booking-form'];
         const btnSubmit = document.getElementById('btnSubmit');
         const formSection = document.getElementById('formSection');
-        const qrisContainer = document.getElementById('qrisContainer');
+        const paymentContainer = document.getElementById('paymentContainer');
         const btnLanjutWA = document.getElementById('btnLanjutWA');
 
         form.addEventListener('submit', e => {
@@ -295,7 +325,7 @@
                     const telp = formData.get('Telp');
                     const lokasi = formData.get('Lokasi');
 
-                    const pesanTemplate = `Halo Admin, saya sudah mengisi form booking via Website dan sudah transfer DP via QRIS!
+                    const pesanTemplate = `Halo Admin, saya sudah mengisi form booking via Website dan sudah transfer DP!
 
 NAMA : ${nama}
 DOMISILI : ${domisili}
@@ -312,11 +342,11 @@ Berikut saya lampirkan bukti transfer DP-nya...`;
                     const textWA = encodeURIComponent(pesanTemplate);
                     const linkWA = `https://wa.me/${nomorWA}?text=${textWA}`;
                     
-                    // --- INOVASI: TAMPILKAN QRIS, BUKAN LANGSUNG REDIRECT ---
+                    // --- TAMPILKAN INFO REKENING, BUKAN LANGSUNG REDIRECT ---
                     // Sembunyikan form
                     formSection.style.display = 'none';
-                    // Tampilkan kotak QRIS
-                    qrisContainer.style.display = 'block';
+                    // Tampilkan kotak pembayaran
+                    paymentContainer.style.display = 'block';
                     // Pasang link WA ke tombol hijau yang baru
                     btnLanjutWA.href = linkWA;
                 })
